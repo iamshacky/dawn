@@ -1,0 +1,91 @@
+
+<!--
+Convert to 2.0 liquid files to json ***
+Video title: How to Migrate Shopify Themes to Online Store 2.0 (Liquid to JSON Templates)
+Url: https://www.youtube.com/watch?v=DO9JUW-6WN8
+Author: Code with Chris the Freelancer
+
+Description: This video shows you how to convert your shopify theme to online store 2.0. From liquid to json.
+-->
+
+1. Remove {% section %} tags
+2. Move surrounding code into their own sections
+3. Replace the Liquid template with a JSON template
+4. Add in references to the sections into your new JSON template
+
+Example:
+
+1. Copy code from: templates/404.liquid, which is:
+
+<div class="page-width">
+  <div class="empty-page-content text-content">
+    <h1>{{ 'general.404.title' | t }}</h1>
+    <p>{{ 'general.404.subtext' | t }}</p>
+    <p><a href='{{ routes.root_url }}' class="btn btn--has-icon-after">{{ general.404.link | t }}</a></p>
+  </div>
+</div>
+
+2. Create: sections/404-template (automatically generates a schema) and then call it 404 template for example.
+
+{% schema %}
+  {
+    "name": "404 template",
+    "settings": []
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+Paste code from step templates/404.liquid into sections/404-template (above the schema), so now it looks like...
+
+<div class="page-width">
+  <div class="empty-page-content text-content">
+    <h1>{{ 'general.404.title' | t }}</h1>
+    <p>{{ 'general.404.subtext' | t }}</p>
+    <p><a href='{{ routes.root_url }}' class="btn btn--has-icon-after">{{ general.404.link | t }}</a></p>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "404 template",
+    "settings": []
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+
+3. Replace the Liquid template with a JSON template by
+  a: Delete templates/404.liquid
+  b: Create new template called 404 and select JSON as file type.
+
+This automatically generates boilerplate JSON. Modify it to look as:
+
+{
+  "sections": {
+    "main": {
+      "type": "404-template",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
+
+
+
+Video times of above example
+1. https://youtu.be/DO9JUW-6WN8?t=370
+2. https://youtu.be/DO9JUW-6WN8?t=403
+3. https://youtu.be/DO9JUW-6WN8?t=444
