@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "wtf-page",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
